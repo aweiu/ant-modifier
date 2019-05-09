@@ -1,44 +1,168 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# ant-modifier
 
-## Available Scripts
+如果你受够了 AntDesign 的原生 Form，那就来试试它吧！一款更懂你的表单提交组件
 
-In the project directory, you can run:
+## 介绍
 
-### `npm start`
+目前功能：
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- 简化 AntForm 的使用（众所周知，ant-form 的设计很复杂...
+- 提交数据之前自动执行校验
+- 通过 Modifier.Modal 提交数据，弹窗会自动管理 loading 和 显隐 状态
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+计划实现：
 
-### `npm test`
+- 提交数据之前自动对比表单数据，如果有变化才会执行并回调数据的异同部分
+- 归一化处理所有需要额外请求的字段，比如：文件和图片的上传
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 安装
 
-### `npm run build`
+```
+npm install ant-modifier
+```
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 调试
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+```
+git clone https://github.com/aweiu/ant-modifier.git
+yarn install
+yarn run start
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 使用
 
-### `npm run eject`
+`react >= 16.3.0` `webpack es6 开发环境`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Modifier.Form
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+该组件提供 Modifier 最基础的功能：你不再需要写 `Form.create` 和 `getFieldDecorator`，即简化 AntForm 的使用。
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+如下示例：
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```
+import * as React from 'react'
+import * as Modifier from 'Modifier'
+import { Input, Button } from 'antd'
 
-## Learn More
+function submit(formData, customData) {
+  console.log(formData, customData)
+  return new Promise((resolve) => setTimeout(resolve, 1000))
+}
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+function onSubmit() {
+  Modifier.Form.submit('modifierForm', 'customData')
+}
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+function App() {
+  return (
+    <Modifier.Form name="modifierForm" action={submit}>
+      <Modifier.Item id="name" rules={[{ required: true }]}>
+        <Input placeholder="请输入用户名" />
+      </Modifier.Item>
+      <Button onClick={onSubmit}>提交</Button>
+    </Modifier.Form>
+  )
+}
+
+```
+
+#### Modifier.Form.props.[name]()
+
+可以理解为组件的 id，有了它你才可以方便地调用到组件实例的各种方法
+
+- 必填
+- 类型：string
+
+#### Modifier.Form.props.[action]()
+
+拿到表单数据之后你要做什么？比如表单的数据提交过程应当交给它
+
+- 必填
+- 类型：(formData: 表单数据, customData?: 自定义数据) => any
+
+#### Modifier.Form.props.[...AntFormCreateOption](<https://ant.design/components/form-cn/#Form.create(options)>)
+
+如果你需要用到 `Form.create` 的某些特性，直接：
+
+```
+ <Modifier.Form mapPropsToFields={ mapPropsToFields } onFieldsChange={ onFieldsChange } />
+```
+
+效果等同于：
+
+```
+Form.create({ mapPropsToFields, onFieldsChange })
+```
+
+#### Modifier.Form.props.[...AntFormProps](https://ant.design/components/form-cn/#Form)
+
+组件代理了 AntForm 的所有 props，可参考上面链接
+
+#### Modifier.Form.[submit]()
+
+组件的静态方法，调用它会执行数据提交前的一些准备工作，如表单校验。完成后会执行 [Modifier.Form.props.action]()
+
+- 类型：(name: 你定义的 [Modifier.Form.props.name](), customData?: 会回调给 [Modifier.Form.props.action]() 的自定义数据) => void
+
+### Modifier.Modal
+
+如果你业务中表单的修改和创建是在弹窗中完成的，那就来用它吧！它除了提供简化 AntForm 的功能外，还为你自动管理了 Modal 的状态。
+
+如下示例：
+
+```
+import * as React from 'react'
+import * as Modifier from 'Modifier'
+import { Input, Button } from 'antd'
+
+function submit(formData, customData) {
+  console.log(formData, customData)
+  return new Promise((resolve) => setTimeout(resolve, 1000))
+}
+
+function onSubmit() {
+  Modifier.Modal.show('modifierModal', 'customData')
+}
+
+function App() {
+  return (
+    <div>
+      <Modifier.Modal name="modifierModal" action={submit} title="创建用户">
+        <Form>
+          <Modifier.Item id="name" rules={[{ required: true }]}>
+            <Input placeholder="请输入用户名" />
+          </Modifier.Item>
+        </Form>
+      </Modifier.Modal>
+      <Button onClick={onSubmit}>创建用户</Button>
+    </div>
+  )
+}
+```
+
+可以看到你唯一需要做的就是在需要它出现的时候去调用 `Modifier.Modal.show`
+
+#### Modifier.Modal.props.name
+
+同 [Modifier.Form.props.name]()
+
+#### Modifier.Modal.props.action
+
+同 [Modifier.Form.props.action]()
+
+#### Modifier.Modal.props.[...AntFormCreateOption](<https://ant.design/components/form-cn/#Form.create(options)>)
+
+同 [Modifier.Form.props.AntFormCreateOption]()
+
+#### Modifier.Modal.props.[...AntModalProps](https://ant.design/components/modal-cn/#API)
+
+- `visible`
+- `confirmLoading`
+- `onOk`
+- `onCancel`
+
+除了以上属性被「征用」了，组件代理了 AntModal 的所有 props，可参考上面链接
+
+#### Modifier.Modal.[show]()
+
+组件的静态方法，调用它会使你的弹窗表单变成可见状态，之后的行为同 [Modifier.Form.submit]() 一致，关闭和 loading 状态由它自己维护

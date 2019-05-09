@@ -1,22 +1,30 @@
 {
-  "name": "ant-modal-modifier",
-  "version": "0.1.0",
+  "name": "ant-modifier-app",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
+    "react": "^16.8.6",
+    "react-dom": "npm:@hot-loader/react-dom",
+    "react-scripts": "3.0.0",
+    "typescript": "3.4.5"
+  },
+  "devDependencies": {
     "@types/jest": "24.0.12",
     "@types/node": "12.0.0",
     "@types/react": "16.8.16",
     "@types/react-dom": "16.8.4",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "react-scripts": "3.0.0",
-    "typescript": "3.4.5"
+    "antd": "^3.17.0",
+    "customize-cra": "^0.2.12",
+    "eslint-config-prettier": "^4.1.0",
+    "eslint-plugin-prettier": "^3.0.1",
+    "prettier": "^1.16.4",
+    "react-app-rewired": "^2.1.1",
+    "react-hot-loader": "^4.8.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "react-app-rewired start",
+    "build": "cd src/Modifier;tsc",
+    "publish": "cd src/Modifier;npm publish"
   },
   "eslintConfig": {
     "extends": "react-app"
