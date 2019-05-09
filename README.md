@@ -6,7 +6,7 @@
 
 目前功能：
 
-- 简化 AntForm 的使用（众所周知，ant-form 的设计很复杂...
+- 简化 AntForm 的使用（众所周知，AntForm 用起来很麻烦...
 - 提交数据之前自动执行校验
 - 通过 Modifier.Modal 提交数据，弹窗会自动管理 loading 和 显隐 状态
 
@@ -35,7 +35,7 @@ yarn run start
 
 ### Modifier.Form
 
-该组件提供 Modifier 最基础的功能：你不再需要写 `Form.create` 和 `getFieldDecorator`，即简化 AntForm 的使用。
+该组件提供 Modifier 最基础的功能：你不需要写 `Form.create` 和 `getFieldDecorator`，简化了 AntForm 的使用
 
 如下示例：
 
@@ -66,14 +66,14 @@ function App() {
 
 ```
 
-#### Modifier.Form.props.[name]()
+#### Modifier.Form.props.[name](https://github.com/aweiu/ant-modifier/blob/master/src/Modifier/src/Container.tsx#L11)
 
 可以理解为组件的 id，有了它你才可以方便地调用到组件实例的各种方法
 
 - 必填
 - 类型：string
 
-#### Modifier.Form.props.[action]()
+#### Modifier.Form.props.[action](https://github.com/aweiu/ant-modifier/blob/master/src/Modifier/src/Container.tsx#L12)
 
 拿到表单数据之后你要做什么？比如表单的数据提交过程应当交给它
 
@@ -98,11 +98,11 @@ Form.create({ mapPropsToFields, onFieldsChange })
 
 组件代理了 AntForm 的所有 props，可参考上面链接
 
-#### Modifier.Form.[submit]()
+#### Modifier.Form.[submit](https://github.com/aweiu/ant-modifier/blob/master/src/Modifier/src/Form.tsx#L12)
 
-组件的静态方法，调用它会执行数据提交前的一些准备工作，如表单校验。完成后会执行 [Modifier.Form.props.action]()
+组件的静态方法，调用它会执行数据提交前的一些准备工作，如表单校验。完成后会执行 [action](#modifierformpropsaction)
 
-- 类型：(name: 你定义的 [Modifier.Form.props.name](), customData?: 会回调给 [Modifier.Form.props.action]() 的自定义数据) => void
+- 类型：(name: 你定义的 [name](#modifierformpropsname), customData?: 会回调给 [action](#modifierformpropsaction) 的自定义数据) => void
 
 ### Modifier.Modal
 
@@ -144,15 +144,15 @@ function App() {
 
 #### Modifier.Modal.props.name
 
-同 [Modifier.Form.props.name]()
+同 [Form.props.name](#modifierformpropsname)
 
 #### Modifier.Modal.props.action
 
-同 [Modifier.Form.props.action]()
+同 [Form.props.action](#modifierformpropsaction)
 
 #### Modifier.Modal.props.[...AntFormCreateOption](<https://ant.design/components/form-cn/#Form.create(options)>)
 
-同 [Modifier.Form.props.AntFormCreateOption]()
+同 [Form.props.AntFormCreateOption](#modifierformpropsantformcreateoption)
 
 #### Modifier.Modal.props.[...AntModalProps](https://ant.design/components/modal-cn/#API)
 
@@ -163,6 +163,12 @@ function App() {
 
 除了以上属性被「征用」了，组件代理了 AntModal 的所有 props，可参考上面链接
 
-#### Modifier.Modal.[show]()
+#### Modifier.Modal.[show](https://github.com/aweiu/ant-modifier/blob/master/src/Modifier/src/Modal.tsx#L26)
 
-组件的静态方法，调用它会使你的弹窗表单变成可见状态，之后的行为同 [Modifier.Form.submit]() 一致，关闭和 loading 状态由它自己维护
+组件的静态方法，调用它会使你的弹窗表单变成可见状态，之后的行为同 [Form.submit](#modifierformsubmit) 一致；关闭和 loading 状态由它自己维护
+
+## 相关文章
+
+- [AntModifier 设计和实现的心路历程]()
+- [浅谈【四更理念】之开发一个管理端](https://zhuanlan.zhihu.com/p/29069924)
+- [前端怎么深入思考？](https://www.zhihu.com/question/322385547/answer/668758964)
