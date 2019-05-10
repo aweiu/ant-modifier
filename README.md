@@ -202,7 +202,7 @@ function App() {
 
 ### getForm
 
-`Modifier`、[Modal]()、[Form]() 共享的静态方法。用于获取某个 `Modifier 实例` 的 [props.form](<https://ant.design/components/form-cn/#Form.create(options)>)
+`Modifier`、[Modal]()、[Form]() 共享的静态方法，用于获取某个 `Modifier 实例` 的 [props.form](<https://ant.design/components/form-cn/#Form.create(options)>)
 
 - 类型：(name: 组件中定义的 `name`) => [WrappedFormUtils](https://github.com/ant-design/ant-design/blob/master/components/form/Form.tsx#L138) | undefined
 
