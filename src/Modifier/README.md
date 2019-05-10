@@ -33,7 +33,7 @@ yarn run start
 
 `react >= 16.3.0` `webpack es6 开发环境`
 
-建议配合 [TypeScript](https://www.tslang.cn/) 食用更佳！调试本项目你得到的就是一份同时支持 js 和 ts 的工程，你可以基于它去改造你的现有项目
+建议配合 [TypeScript](https://www.tslang.cn/) 食用！调试本项目你得到的就是一份同时支持 js 和 ts 的工程，所以你可以基于它去改造你的现有项目
 
 ### Modifier.Form
 
