@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "strict": true,
-    "jsx": "react-native",
+    "jsx": "react",
     "moduleResolution": "node",
     "module": "esnext",
     "target": "esnext",
