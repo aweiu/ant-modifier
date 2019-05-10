@@ -23,9 +23,11 @@ function showModifierModal2() {
 }
 
 function submitModifierForm() {
+  console.log(Modifier.getForm('modifierForm'))
   Modifier.Form.submit('modifierForm', 'customData')
 }
 
+console.log(Modifier.getForm === Modifier.Modal.getForm)
 const App: React.FC = () => {
   return (
     <div>

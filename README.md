@@ -200,6 +200,23 @@ function App() {
 </Form.Item>
 ```
 
+### getForm
+
+`Modifier`、[Modal]()、[Form]() 共享的静态方法。用于在某些情况需要获取某个 `Modifier 实例` 的 [props.form](<https://ant.design/components/form-cn/#Form.create(options)>)
+
+- 类型：(name: 组件中定义的 `name`) => [WrappedFormUtils](https://github.com/ant-design/ant-design/blob/master/components/form/Form.tsx#L138) | undefined
+
+```
+import * as Modifier from 'Modifier'
+
+const form = Modifier.getForm('userCreator')
+// const form = Modifier.Modal.getForm('userCreator')
+// const form = Modifier.Form.getForm('userCreator')
+if (form) {
+  console.log(form.getFieldsValue()) // https://github.com/ant-design/ant-design/blob/master/components/form/Form.tsx#L140
+}
+```
+
 ## 相关文章
 
 - [AntModifier 设计和实现的心路历程](https://zhuanlan.zhihu.com/p/64983378)

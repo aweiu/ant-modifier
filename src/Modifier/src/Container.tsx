@@ -46,6 +46,11 @@ export default abstract class ModifierContainer<
 
   abstract Container: React.ComponentType
 
+  static getForm(name: string) {
+    const instance = instances.get(name)
+    if (instance) return instance.form
+  }
+
   componentWillMount() {
     const name = this.props.name
     // 为了干掉 Form.create ，rcForm 的创建只能是动态的，它也因此变成了当前组件的子组件
