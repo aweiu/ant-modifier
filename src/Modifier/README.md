@@ -9,6 +9,7 @@
 - 简化 AntForm 的使用（众所周知，AntForm 用起来很麻烦...
 - 提交数据之前自动执行校验
 - 通过 Modifier.Modal 提交数据，弹窗会自动管理 loading 和 显隐 状态
+- 通过 Modifier.Modal 提交数据，提交成功后会自动初始化表单
 
 计划实现：
 

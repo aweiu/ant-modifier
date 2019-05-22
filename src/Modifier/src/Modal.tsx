@@ -50,9 +50,10 @@ export default class ModifierModal<
         try {
           await action(formData, this.customData as CustomData)
           this.setState({ confirmLoading: false, visible: false })
+          this.form.resetFields()
         } catch (e) {
           console.error(e)
-          this.hide()
+          this.setState({ confirmLoading: false })
         }
       }
     })
