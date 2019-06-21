@@ -1,4 +1,4 @@
-import { FormProps } from 'antd/es/form/Form'
+import { FormProps } from 'antd/es/form'
 import ModifierContainer from './Container'
 import instances from './instances'
 import BaseForm from './BaseForm'

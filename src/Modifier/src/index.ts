@@ -5,3 +5,5 @@ import Item from './Item'
 
 export { Item, Form, Modal }
 export const getForm = Container.getForm
+
+export default { Item, Form, Modal, getForm }
