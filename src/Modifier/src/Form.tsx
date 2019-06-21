@@ -11,13 +11,15 @@ export default class ModifierForm<
 
   static submit<CustomData = any>(name: string, customData?: CustomData) {
     const instance = instances.get<ModifierForm>(name)
-    if (instance) instance.submit(customData)
+    return instance ? instance.submit(customData) : Promise.resolve()
   }
 
   submit = (customData: CustomData) => {
     const { action } = this.props
-    this.form.validateFields(async (err, formData: FormData) =>
-      action(formData, customData),
-    )
+    return new Promise((resolve) => {
+      this.form.validateFields((err, formData: FormData) => {
+        if (!err) resolve(action(formData, customData))
+      })
+    })
   }
 }

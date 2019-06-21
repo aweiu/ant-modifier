@@ -102,9 +102,9 @@ Form.create({ mapPropsToFields, onFieldsChange })
 
 #### Modifier.Form.[submit](https://github.com/aweiu/ant-modifier/blob/master/src/Modifier/src/Form.tsx#L12)
 
-组件的静态方法，调用它会执行数据提交前的一些准备工作，如表单校验。完成后会执行 [action](#modifierformpropsaction)
+组件的静态方法，调用它会执行数据提交前的一些准备工作，如表单校验。校验通过后会执行 [action](#modifierformpropsaction)
 
-- 类型：(name: 你定义的 [name](#modifierformpropsname), customData?: 会回调给 [action](#modifierformpropsaction) 的自定义数据) => void
+- 类型：(name: 你定义的 [name](#modifierformpropsname), customData?: 会回调给 [action](#modifierformpropsaction) 的自定义数据) => Promise
 
 ### Modifier.Modal
 

@@ -27,7 +27,6 @@ function submitModifierForm() {
   Modifier.Form.submit('modifierForm', 'customData')
 }
 
-console.log(Modifier.getForm === Modifier.Modal.getForm)
 const App: React.FC = () => {
   return (
     <div>
