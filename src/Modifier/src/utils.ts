@@ -1,7 +1,7 @@
 export function excludeProps(keys: string[], props: any) {
-  const newProps: any = {}
-  for (let key of Object.keys(props)) {
-    if (!keys.includes(key)) newProps[key] = props[key]
+  const newProps: any = { ...props }
+  for (let key of keys) {
+    delete newProps[key]
   }
   return newProps
 }
