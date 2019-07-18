@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button, Form, Input } from 'antd'
 import { hot } from 'react-hot-loader'
-import * as Modifier from './Modifier/src'
+import Modifier from './Modifier/src'
 
 interface FormData {
   name: string
@@ -40,7 +40,7 @@ const App: React.FC = () => {
       <Modifier.Modal<FormData, CustomData>
         name="modifierModal1"
         action={submit}
-        title="Hello Ant ModifierModal1"
+        // title="Hello Ant ModifierModal1"
         okText="确定"
         cancelText="取消"
         onValuesChange={() => console.log('ModifierModal1 change')}

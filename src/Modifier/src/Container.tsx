@@ -5,6 +5,7 @@ import { FormCreateOption } from 'antd/es/form'
 import { RcBaseFormProps, WrappedFormUtils } from 'antd/es/form/Form'
 import Context from './Context'
 import { excludeProps } from './utils'
+import { Omit } from 'antd/es/_util/type'
 
 type Overwrite<A extends object, B extends object> = Pick<
   A,
@@ -29,17 +30,16 @@ const EXCLUDE_KEYS = [
 ]
 
 export default abstract class ModifierContainer<
-  Props,
+  Props extends {},
   State,
   FormData,
   CustomData,
-  InjectProps extends string = any
+  InjectProps extends keyof Props = never
 > extends React.PureComponent<
   // 防止某些组件中存在和 ModifierContainerProps 中同名的 prop
   // 会在交叉后生成一些不可能的类型 比如 Form 中的 action，会导致 action 既是 FormProps.action 又是 ModifierContainerProps.action
   Overwrite<
-    // @ts-ignore
-    Props,
+    Omit<Props, InjectProps>,
     FormCreateOption<any> & ModifierContainerProps<FormData, CustomData>
   >,
   State
@@ -48,7 +48,7 @@ export default abstract class ModifierContainer<
   formContainer = React.createRef()
   rcForm = React.createRef()
 
-  abstract Container: React.ComponentType
+  abstract Container: React.ComponentType<any>
 
   static getForm(name: string) {
     const instance = instances.get(name)
