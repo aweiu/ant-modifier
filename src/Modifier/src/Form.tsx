@@ -1,13 +1,22 @@
+import * as React from 'react'
+import { Form } from 'antd'
 import { FormProps } from 'antd/es/form'
 import ModifierContainer from './Container'
 import instances from './instances'
-import BaseForm from './BaseForm'
+import { excludeProps } from './utils'
+
+// AntForm 不能再作为 Form.create 的参数，所以再包装一层
+class ModifierAntForm extends React.PureComponent {
+  render() {
+    return <Form {...excludeProps(['form'], this.props)} />
+  }
+}
 
 export default class ModifierForm<
   FormData = any,
   CustomData = any
 > extends ModifierContainer<FormProps, any, FormData, CustomData> {
-  Container = BaseForm // 如果直接使用 AntForm 会有问题，需要对 prop 进行过滤处理
+  Container = ModifierAntForm
 
   static submit<CustomData = any>(name: string, customData?: CustomData) {
     const instance = instances.get<ModifierForm>(name)
