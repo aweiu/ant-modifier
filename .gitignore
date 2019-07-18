@@ -24,4 +24,3 @@ yarn-error.log*
 
 .idea
 src/Modifier/dist
-src/Modifier/types

@@ -8,6 +8,7 @@
     }
   },
   "rules": {
+    "jsx-a11y/iframe-has-title": "off",
     // https://github.com/bradzacher/eslint-plugin-typescript/blob/master/docs/rules/no-unused-vars.md
     "no-unused-vars": "off",
     "@typescript-eslint/no-unused-vars": [
