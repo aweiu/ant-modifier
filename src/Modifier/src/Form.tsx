@@ -3,11 +3,12 @@ import { Form } from 'antd'
 import { FormProps } from 'antd/es/form'
 import ModifierContainer from './Container'
 import instances from './instances'
+import { excludeProps } from './utils'
 
 // AntForm 不能再作为 Form.create 的参数，所以再包装一层
 class ModifierAntForm extends React.PureComponent {
   render() {
-    return <Form {...this.props} />
+    return <Form {...excludeProps(['form'], this.props)} />
   }
 }
 

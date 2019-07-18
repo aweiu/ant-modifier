@@ -48,7 +48,7 @@ export default abstract class ModifierContainer<
   formContainer = React.createRef()
   rcForm = React.createRef()
 
-  abstract Container: React.ComponentType<any>
+  abstract Container: React.ComponentType<Props>
 
   static getForm(name: string) {
     const instance = instances.get(name)
@@ -58,7 +58,7 @@ export default abstract class ModifierContainer<
   componentWillMount() {
     const name = this.props.name
     // 为了干掉 Form.create ，rcForm 的创建只能是动态的，它也因此变成了当前组件的子组件
-    this.FormContainer = Form.create(this.props)(this.Container)
+    this.FormContainer = Form.create(this.props)(this.Container as any)
     instances.set(name, this)
   }
 
