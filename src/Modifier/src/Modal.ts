@@ -1,10 +1,6 @@
 import { Modal } from 'antd'
-import ModalLike from './ModalLike'
+import createModalLike from './createModalLike'
 import { ModalProps } from 'antd/es/modal'
 
-export default class ModifierModal<
-  FormData = any,
-  CustomData = any
-> extends ModalLike<FormData, CustomData, ModalProps> {
-  Container = Modal
-}
+const ModifierModal = createModalLike<ModalProps>(Modal)
+export default ModifierModal

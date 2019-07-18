@@ -2,16 +2,14 @@ import * as React from 'react'
 import { Button, Popover } from 'antd'
 import { PopoverProps } from 'antd/es/popover'
 import { excludeProps } from './utils'
-import ModalLike, { ModifierModalLikeProps } from './ModalLike'
-import { ModalProps } from 'antd/es/modal'
+import createModalLike, { ModifierModalLikeProps } from './createModalLike'
 
-type ModifierAntPopoverProps = ModifierModalLikeProps & PopoverProps
 interface ModifierAntPopoverState {
   visible?: boolean
 }
 
 class ModifierAntPopover extends React.PureComponent<
-  ModifierAntPopoverProps,
+  ModifierModalLikeProps & PopoverProps,
   ModifierAntPopoverState
 > {
   state = {
@@ -68,9 +66,4 @@ class ModifierAntPopover extends React.PureComponent<
   }
 }
 
-export default class ModifierPopover<
-  FormData = any,
-  CustomData = any
-> extends ModalLike<FormData, CustomData, ModalProps> {
-  Container = ModifierAntPopover
-}
+export default createModalLike(ModifierAntPopover)

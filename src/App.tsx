@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button, Form, Input } from 'antd'
 import { hot } from 'react-hot-loader'
-import Modifier from './Modifier/src'
+import * as Modifier from './Modifier/src'
 
 interface FormData {
   name: string
