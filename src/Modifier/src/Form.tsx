@@ -25,9 +25,10 @@ export default class ModifierForm<
 
   submit = (customData: CustomData) => {
     const { action } = this.props
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
       this.form.validateFields((err, formData: FormData) => {
-        if (!err) resolve(action(formData, customData))
+        if (err) reject(err)
+        else resolve(action(formData, customData))
       })
     })
   }
